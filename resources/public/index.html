@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Ogol</title>
+  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <style>
+#processing-window { width: 600px; height: 300px; padding: 0.5em; }
+#repl-window { width: 600px; height: 100px; padding: 0.5em; }
+    </style>
+    <script>
+$(document).ready(function() {
+    $("#processing-window").resizable();
+    $("#repl-window").resizable();
+});
+    </script>
+  </head>
+  <body>
+    <div id="heading">
+      <h1>Ogol</h1>
+    </div>
+    <div id="processing-window" class="ui-widget-content">
+    	<p>pro</p>
+    </div>
+    <div id="repl-window" class="ui-widget-content">
+    </div>
+    <script src="/development.js"></script>
+  </body>
+</html>
