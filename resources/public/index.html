@@ -2,17 +2,22 @@
 <html>
   <head>
   	<title>Ogol</title>
-  	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<link rel="stylesheet" type="text/css" href="/console.css" />
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  	<script src="https://github.com/downloads/processing-js/processing-js/processing-1.4.1.js"></script>
+  	<script src="https://raw.github.com/chrisdone/jquery-console/master/jquery.console.js"></script>
     <style>
+#canvas1 { width: 580px; height: 290px; }
 #processing-window { width: 600px; height: 300px; padding: 0.5em; }
-#repl-window { width: 600px; height: 100px; padding: 0.5em; }
+#console-window { width: 600px; height: 110px; padding: 0.5em; }
     </style>
     <script>
 $(document).ready(function() {
-    $("#processing-window").resizable();
-    $("#repl-window").resizable();
+    $("#processing-window").resizable({ alsoResize: "#canvas1", autoHide: true });
+    $("#console-window").resizable({ alsoResize: "#console1, div.jquery-console-inner", autoHide: true,
+    								 resize: function(event, ui) {} });
 });
     </script>
   </head>
@@ -21,10 +26,61 @@ $(document).ready(function() {
       <h1>Ogol</h1>
     </div>
     <div id="processing-window" class="ui-widget-content">
-    	<p>pro</p>
+    	<canvas id="canvas1"></canvas>
     </div>
-    <div id="repl-window" class="ui-widget-content">
+    <div id="console-window" class="ui-widget-content">
+    	<div id="console1"></div>
     </div>
     <script src="/development.js"></script>
+	<script>
+  		ogol.console.go();
+  		goog.require('cljs.core');
+  		goog.require('jayq.core');
+  		goog.provide('cljs.user');
+	</script>
+    <script>
+    // Hello world style test of Processing.js
+/*
+function sketchProc(processing) {
+  processing.setup = function() {
+  	processing.size(580, 290);
+  }
+  // Override draw function, by default it will be called 60 times per second
+  processing.draw = function() {
+    // determine center and max clock arm length
+    var centerX = processing.width / 2, centerY = processing.height / 2;
+    var maxArmLength = Math.min(centerX, centerY);
+
+    function drawArm(position, lengthScale, weight) {
+      processing.strokeWeight(weight);
+      processing.line(centerX, centerY,
+        centerX + Math.sin(position * 2 * Math.PI) * lengthScale * maxArmLength,
+        centerY - Math.cos(position * 2 * Math.PI) * lengthScale * maxArmLength);
+    }
+
+    // erase background
+    processing.background(224);
+
+    var now = new Date();
+
+    // Moving hours arm by small increments
+    var hoursPosition = (now.getHours() % 12 + now.getMinutes() / 60) / 12;
+    drawArm(hoursPosition, 0.5, 5);
+
+    // Moving minutes arm by small increments
+    var minutesPosition = (now.getMinutes() + now.getSeconds() / 60) / 60;
+    drawArm(minutesPosition, 0.80, 3);
+
+    // Moving hour arm by second increments
+    var secondsPosition = now.getSeconds() / 60;
+    drawArm(secondsPosition, 0.90, 1);
+  };
+}
+
+var canvas = document.getElementById("canvas1");
+// attaching the sketchProc function to the canvas
+var processingInstance = new Processing(canvas, sketchProc);
+*/
+    </script>
   </body>
 </html>

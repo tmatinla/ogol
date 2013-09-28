@@ -2,8 +2,11 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [compojure "1.1.5"]]
-  :plugins [[lein-ring "0.8.5"]
+                 [org.clojure/clojurescript "0.0-1909"]
+                 [compojure "1.1.5"]
+                 [ring-clj-params "0.1.0"]
+                 [jayq "2.4.0"]]
+  :plugins [[lein-ring "0.8.7"]
             [lein-cljsbuild "0.3.3"]]
   :source-paths ["src/clojure"]
   :cljsbuild {:builds [{:source-paths ["src/cljs"]
