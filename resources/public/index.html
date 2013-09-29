@@ -3,39 +3,41 @@
   <head>
   	<title>Ogol</title>
   	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<link rel="stylesheet" type="text/css" href="/canvas.css" />
   	<link rel="stylesheet" type="text/css" href="/console.css" />
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   	<script src="https://github.com/downloads/processing-js/processing-js/processing-1.4.1.js"></script>
   	<script src="https://raw.github.com/chrisdone/jquery-console/master/jquery.console.js"></script>
     <style>
-#canvas1 { width: 580px; height: 290px; }
-#processing-window { width: 600px; height: 300px; padding: 0.5em; }
-#console-window { width: 600px; height: 110px; padding: 0.5em; }
     </style>
     <script>
-$(document).ready(function() {
-    $("#processing-window").resizable({ alsoResize: "#canvas1", autoHide: true });
-    $("#console-window").resizable({ alsoResize: "#console1, div.jquery-console-inner", autoHide: true,
-    								 resize: function(event, ui) {} });
-});
+/* $(document).ready(function() {
+    $("#canvas-window").resizable({ alsoResize: "#canvas1", autoHide: true });
+    $("#canvas-window").draggable();
+    $("#console-window").resizable({ alsoResize: "#console1, div.jquery-console-inner", autoHide: true });
+    $("#console-window").draggable();
+}); */
     </script>
   </head>
   <body>
     <div id="heading">
       <h1>Ogol</h1>
     </div>
-    <div id="processing-window" class="ui-widget-content">
+    <div id="canvas-window" class="ui-widget-content">
+    	<h3 class="ui-widget-header" style="margin: 0px;">Canvas</h3>
     	<canvas id="canvas1"></canvas>
     </div>
     <div id="console-window" class="ui-widget-content">
+    	<h3 class="ui-widget-header" style="margin: 0px;">Console</h3>
     	<div id="console1"></div>
     </div>
     <script src="/development.js"></script>
 	<script>
-  		ogol.console.go();
+		goog.require('ogol.console');
+		ogol.canvas.createCanvas();
+  		ogol.console.createConsole();
   		goog.require('cljs.core');
-  		goog.require('jayq.core');
   		goog.provide('cljs.user');
 	</script>
     <script>

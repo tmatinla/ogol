@@ -1,7 +1,11 @@
+#console-window { width: 640px; height: 225px;
+                  /* padding: 0.5em; */
+                  margin: 3px; }
+
 #console1 { word-wrap: break-word; }
 #console1 { font-size: 14px }
 #console1 div.jquery-console-inner
-{ width:580px; height:100px; background:#333; padding:0.5em;
+{ width:626px; height:170px; background:#333; padding:0.5em;
   overflow:auto }
 #console1 div.jquery-console-prompt-box, #console1 div.jquery-console-welcome
 { color:#fff; font-family:monospace; }

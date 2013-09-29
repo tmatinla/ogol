@@ -1,21 +1,19 @@
 (ns ogol.console
+  (:use [ogol.utils :only [map->js]]
+        [jayq.core :only [$]])
+  (:require-macros [jayq.macros :as jayq])
   (:require [himera.client.repl :as himera]))
 
-(defn- map->js [m]
-  (let [out (js-obj)]
-    (doseq [[k v] m]
-      (aset out (name k) v))
-    out))
-
-(defn ^:export go []
-  (.ready (js/jQuery js/document)
-          (fn []
-            (set! js/controller
-                  (doto (js/jQuery "#console1")
-                    (.console (map->js {:welcomeMessage "Ogol console"
-                                        :promptLabel "Ogol> "
-                                        :commandValidate himera/on-validate
-                                        :commandHandle himera/on-handle
-                                        :autofocus true
-                                        :animateScroll true
-                                        :promptHistory true})))))))
+(defn ^:export createConsole []
+  (jayq/ready
+    (doto ($ :#console-window)
+      (.resizable (map->js {:alsoResize "#console1, div.jquery-console-inner"
+                            :autoHide true }))
+      (.draggable))
+    (doto ($ :#console1)        
+      (.console (map->js {:promptLabel "Ogol> "
+                          :commandValidate himera/on-validate
+                          :commandHandle himera/on-handle
+                          :autofocus true
+                          :animateScroll true
+                          :promptHistory true})))))
