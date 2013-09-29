@@ -1,5 +1,8 @@
-#sketch-window { 
-				 width: 300px; height: 600px;
+#sketch-window { position: absolute;
+				 top: 5px; left: 653px;
+				 width: 320px; height: 573px;
                  margin: 3px;}
 
-#sketch1 { width: 295px; height: 540px; }
+#sketch1 { width: 315px; height: 508px;
+           font-family: monospace;
+           resize: none; }

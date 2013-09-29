@@ -35244,14 +35244,16 @@ goog.require("libre.sketch");
 goog.require("jayq.core");
 ogol.sketch.createSketch = function createSketch() {
   return jayq.core.document_ready.call(null, function() {
-    var G__5905_5908 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#sketch-window", "#sketch-window", 2429863264));
-    G__5905_5908.resizable(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "alsoResize", "alsoResize", 2228160205), "#sketch1", new cljs.core.Keyword(null, "autoHide", "autoHide", 2452271875), true], true)));
-    G__5905_5908.draggable();
-    var G__5906_5909 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#run-sketch", "#run-sketch", 3711499523));
-    G__5906_5909.button(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "icons", "icons", 1113933452), cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "primary", "primary", 699138420), "ui-icon-play"], true)], true)));
-    var G__5907 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#stop-sketch", "#stop-sketch", 2964657990));
-    G__5907.button(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "icons", "icons", 1113933452), cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "primary", "primary", 699138420), "ui-icon-stop"], true)], true)));
-    return G__5907
+    var G__5941_5944 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#sketch-window", "#sketch-window", 2429863264));
+    G__5941_5944.resizable(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "alsoResize", "alsoResize", 2228160205), "#sketch1", new cljs.core.Keyword(null, "autoHide", "autoHide", 2452271875), true], true)));
+    G__5941_5944.draggable();
+    var G__5942_5945 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#run-sketch", "#run-sketch", 3711499523));
+    G__5942_5945.button(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "icons", "icons", 1113933452), cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "primary", "primary", 699138420), "ui-icon-play"], true)], true))).click(function(e) {
+      return ogol.sketch.runSketch()
+    });
+    var G__5943 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#stop-sketch", "#stop-sketch", 2964657990));
+    G__5943.button(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "icons", "icons", 1113933452), cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "primary", "primary", 699138420), "ui-icon-stop"], true)], true)));
+    return G__5943
   })
 };
 goog.exportSymbol("ogol.sketch.createSketch", ogol.sketch.createSketch);
@@ -37519,8 +37521,34 @@ clojure.browser.repl.connect = function connect(repl_server_url) {
 };
 goog.provide("ogol.repl");
 goog.require("cljs.core");
+goog.require("jayq.core");
+goog.require("jayq.core");
 goog.require("clojure.browser.repl");
-clojure.browser.repl.connect.call(null, "http://192.168.10.105:9000/repl");
+ogol.repl.launch_repl = function launch_repl(url) {
+  return clojure.browser.repl.connect.call(null, function() {
+    var or__3943__auto__ = url;
+    if(cljs.core.truth_(or__3943__auto__)) {
+      return or__3943__auto__
+    }else {
+      return"http://localhost:9000/repl"
+    }
+  }())
+};
+ogol.repl.get_value = function get_value(elem) {
+  return jayq.core.$.call(null, elem).get(0).value
+};
+ogol.repl.createRepl = function createRepl() {
+  return jayq.core.document_ready.call(null, function() {
+    var G__5927_5929 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#external-repl-window", "#external-repl-window", 3225067809));
+    G__5927_5929.draggable();
+    var G__5928 = jayq.core.$.call(null, new cljs.core.Keyword(null, "#connect-repl", "#connect-repl", 1202511239));
+    G__5928.button(cljs.core.clj__GT_js.call(null, cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "icons", "icons", 1113933452), cljs.core.PersistentArrayMap.fromArray([new cljs.core.Keyword(null, "primary", "primary", 699138420), "ui-icon-play"], true)], true))).click(function(event) {
+      return ogol.repl.launch_repl.call(null, ogol.repl.get_value.call(null, new cljs.core.Keyword(null, "#repl-url", "#repl-url", 1745643174)))
+    });
+    return G__5928
+  })
+};
+goog.exportSymbol("ogol.repl.createRepl", ogol.repl.createRepl);
 goog.provide("clojure.zip");
 goog.require("cljs.core");
 clojure.zip.zipper = function zipper(branch_QMARK_, children, make_node, root) {

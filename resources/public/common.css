@@ -1,1 +1,15 @@
-.ui-widget-header { margin: 0px; }
+body { font-family: Helvetica, Arial, sans-serif;
+       font-weight: normal;
+       font-size: 1.0em;
+       background-image: url('/lblue167.gif'); }
+h1 { margin-top: 2px; }
+#heading { position: absolute;
+ 	       left: 1000px;
+	       top: 0px; }
+#description { position: absolute;
+               left: 1000px; 
+               top: 50px;
+               margin-right: 5px; }
+.ui-widget-header { margin: 0px;
+                    padding-left: 5px; }
+.ui-button-text { font-size: 0.7em; }

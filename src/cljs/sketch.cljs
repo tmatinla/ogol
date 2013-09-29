@@ -10,7 +10,8 @@
                             :autoHide true }))
       (.draggable))
     (doto ($ :#run-sketch)
-      (.button (clj->js {:icons {:primary "ui-icon-play"}})))
+      (-> (.button (clj->js {:icons {:primary "ui-icon-play"}}))
+      	  (.click (fn [e] (js/ogol.sketch.runSketch)))))
     (doto ($ :#stop-sketch)
       (.button (clj->js {:icons {:primary "ui-icon-stop"}})))))
 

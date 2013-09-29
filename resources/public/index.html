@@ -7,6 +7,7 @@
   	<link rel="stylesheet" type="text/css" href="/canvas.css" />
   	<link rel="stylesheet" type="text/css" href="/console.css" />
   	<link rel="stylesheet" type="text/css" href="/sketch.css" />
+  	<link rel="stylesheet" type="text/css" href="/external-repl.css" />
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   	<script src="https://github.com/downloads/processing-js/processing-js/processing-1.4.1.js"></script>
@@ -20,6 +21,20 @@
     <div id="heading">
       <h1>Ogol</h1>
     </div>
+    <div id="description">
+    	<p>Ogol is an interactive environment for playing with ClojureScript
+    		and Processing.js.</p>
+    	<p>You can use Sketch window to edit/run a Libre sketch</p>
+    	<p>You can use Console window to try out ClojureScript</p>
+    	<p>Windows can be resized and reorganized as you like (but order or
+    		positions are not remembered yet)</p>
+    	<hr>
+    	<p>Future plans for application:</p>
+    	<ul>
+    		<li>Save/share sketches</li>
+    		<li>Add possibility to use external REPL for additional control</li>
+        </ul>
+    </div>
     <div id="canvas-window" class="ui-widget-content">
     	<h3 class="ui-widget-header">Canvas</h3>
     	<canvas id="canvas1"></canvas>
@@ -30,20 +45,48 @@
     </div>
     <div id="sketch-window" class="ui-widget-content">
     	<h3 class="ui-widget-header">Sketch</h3>
-    	<textarea id="sketch1"></textarea>
+    	<textarea id="sketch1">(defsketch "random-circles"
+  {:setup
+   (fn []
+     (sk/size (- (sk/screen-width) 50)
+              (- (sk/screen-height) 50))
+     (sk/smooth)
+     (sk/background 255))
+   :key-typed (fn [] (sk/background 255))
+   :draw (fn []
+           (sk/fill 255 1)
+           (sk/no-stroke)
+           (sk/rect 0 0 (sk/sketch-width)
+                        (sk/sketch-height))
+           (sk/fill (sk/random 255)
+                    (sk/random 255)
+                    (sk/random 255))
+           (sk/stroke-weight (sk/random 10))
+           (sk/stroke 0)
+           (sk/random-circle))})</textarea>
     	<button id="run-sketch">Run</button>
     	<button id="stop-sketch">Stop</button>
     </div>
+    <!--
+    <div id="external-repl-window" class="ui-widget-content">
+    	<h3 class="ui-widget-header">External REPL</h3>
+    	<p>Connect an external ClojureScript REPL</p>
+    	<input type="text" id="repl-url" value="http://localhost:9000">
+    	<button id="connect-repl">Connect to REPL</button>
+    </div>
+    -->
 
     <script src="/development.js"></script>
 	<script>
 	    goog.require('ogol.canvas');
 	    goog.require('ogol.console');
 	    goog.require('ogol.sketch');
+	    // goog.require('ogol.repl');
 
 		ogol.canvas.createCanvas();
   		ogol.console.createConsole();
   		ogol.sketch.createSketch();
+  		// ogol.repl.createRepl();
 
   		goog.require('cljs.core'); // needed for console? Himera has this
   		goog.provide('cljs.user');
