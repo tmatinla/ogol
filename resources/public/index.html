@@ -3,8 +3,10 @@
   <head>
   	<title>Ogol</title>
   	<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  	<link rel="stylesheet" type="text/css" href="/common.css" />
   	<link rel="stylesheet" type="text/css" href="/canvas.css" />
   	<link rel="stylesheet" type="text/css" href="/console.css" />
+  	<link rel="stylesheet" type="text/css" href="/sketch.css" />
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   	<script src="https://github.com/downloads/processing-js/processing-js/processing-1.4.1.js"></script>
@@ -12,12 +14,6 @@
     <style>
     </style>
     <script>
-/* $(document).ready(function() {
-    $("#canvas-window").resizable({ alsoResize: "#canvas1", autoHide: true });
-    $("#canvas-window").draggable();
-    $("#console-window").resizable({ alsoResize: "#console1, div.jquery-console-inner", autoHide: true });
-    $("#console-window").draggable();
-}); */
     </script>
   </head>
   <body>
@@ -25,19 +21,31 @@
       <h1>Ogol</h1>
     </div>
     <div id="canvas-window" class="ui-widget-content">
-    	<h3 class="ui-widget-header" style="margin: 0px;">Canvas</h3>
+    	<h3 class="ui-widget-header">Canvas</h3>
     	<canvas id="canvas1"></canvas>
     </div>
     <div id="console-window" class="ui-widget-content">
-    	<h3 class="ui-widget-header" style="margin: 0px;">Console</h3>
+    	<h3 class="ui-widget-header">Console</h3>
     	<div id="console1"></div>
     </div>
+    <div id="sketch-window" class="ui-widget-content">
+    	<h3 class="ui-widget-header">Sketch</h3>
+    	<textarea id="sketch1"></textarea>
+    	<button id="run-sketch">Run</button>
+    	<button id="stop-sketch">Stop</button>
+    </div>
+
     <script src="/development.js"></script>
 	<script>
-		goog.require('ogol.console');
+	    goog.require('ogol.canvas');
+	    goog.require('ogol.console');
+	    goog.require('ogol.sketch');
+
 		ogol.canvas.createCanvas();
   		ogol.console.createConsole();
-  		goog.require('cljs.core');
+  		ogol.sketch.createSketch();
+
+  		goog.require('cljs.core'); // needed for console? Himera has this
   		goog.provide('cljs.user');
 	</script>
     <script>

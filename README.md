@@ -8,8 +8,8 @@ You can use it online here: http://ogol.clojurecup.com
 ## Technologies used
 
 * ClojureScript compilation (REPL) is provided by Himera
-* Processing.js
-* jQuery (wrapped with jayq), jQuery console
+* Processing.js (wrapped with Libre)
+* jQuery (wrapped with jayq), jQuery UI, jQuery console
 
 ## Prerequisites
 
