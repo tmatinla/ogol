@@ -2,6 +2,10 @@
 
 (def ^:private sk-names
   '{sk/*processing* {:name libre.sketch.*processing*},
+    sk/PI {:name libre.sketch.PI},
+    sk/HALF_PI {:name libre.sketch.HALF_PI},
+    sk/QUARTER_PI {:name libre.sketch.QUARTER_PI},
+    sk/TWO_PI {:name libre.sketch.TWO_PI},
     sk/arc {:name libre.sketch.arc},
     sk/ellipse {:name libre.sketch.ellipse},
     sk/*ellipse-modes* {:name libre.sketch.*ellipse-modes*},

@@ -60,9 +60,11 @@
     <div id="sketch-window" class="ui-widget-content">
     	<h3 class="ui-widget-header">Sketch</h3>
     	<textarea id="sketch1">{:setup
-   (fn [] (sk/frame-rate 2)
-          (sk/smooth)
-          (sk/background 127))
+   (fn []
+       (sk/size 640 320)
+       (sk/frame-rate 2)
+       (sk/smooth)
+       (sk/background 127))
  :key-typed (fn [] (sk/background 127))
  :draw (fn []
            (sk/fill 255 1)
@@ -87,6 +89,15 @@
     </div>
     -->
 
+    <div id="instructions-sketch">
+    	Try these in Sketch
+    	<ul>
+    		<li>(sk/arc x y width height start stop)</li>
+    		<li>(sk/rect x y width height)</li>
+    		<li>(sk/ellipse x y width height)</li>
+    	</ul>
+    </div>
+
     <script src="/development.js"></script>
 	<script>
 	    goog.require('ogol.canvas');
@@ -104,49 +115,5 @@
   		goog.require('cljs.core'); // needed for console? Himera has this
   		goog.provide('cljs.user');
 	</script>
-    <script>
-    // Hello world style test of Processing.js
-/*
-function sketchProc(processing) {
-  processing.setup = function() {
-  	processing.size(580, 290);
-  }
-  // Override draw function, by default it will be called 60 times per second
-  processing.draw = function() {
-    // determine center and max clock arm length
-    var centerX = processing.width / 2, centerY = processing.height / 2;
-    var maxArmLength = Math.min(centerX, centerY);
-
-    function drawArm(position, lengthScale, weight) {
-      processing.strokeWeight(weight);
-      processing.line(centerX, centerY,
-        centerX + Math.sin(position * 2 * Math.PI) * lengthScale * maxArmLength,
-        centerY - Math.cos(position * 2 * Math.PI) * lengthScale * maxArmLength);
-    }
-
-    // erase background
-    processing.background(224);
-
-    var now = new Date();
-
-    // Moving hours arm by small increments
-    var hoursPosition = (now.getHours() % 12 + now.getMinutes() / 60) / 12;
-    drawArm(hoursPosition, 0.5, 5);
-
-    // Moving minutes arm by small increments
-    var minutesPosition = (now.getMinutes() + now.getSeconds() / 60) / 60;
-    drawArm(minutesPosition, 0.80, 3);
-
-    // Moving hour arm by second increments
-    var secondsPosition = now.getSeconds() / 60;
-    drawArm(secondsPosition, 0.90, 1);
-  };
-}
-
-var canvas = document.getElementById("canvas1");
-// attaching the sketchProc function to the canvas
-var processingInstance = new Processing(canvas, sketchProc);
-*/
-    </script>
   </body>
 </html>
