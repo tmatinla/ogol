@@ -34,6 +34,20 @@
     		<li>Save/share sketches</li>
     		<li>Add possibility to use external REPL for additional control</li>
         </ul>
+        <hr>
+        <p>Background</p>
+        <p>This is my first
+        	<a href="https://github.com/clojure/clojurescript">ClojureScript</a>
+        	application, made for
+        	<a href="http://clojurecup.com">Clojure Cup 2013</a>.
+        	I wanted to take ideas from
+        	<a href="http://himera.heroku.com">Himera</a> and
+        	<a href="https://github.com/craigbro/libre">Libre</a> and combine
+        	those into an interactive environment, something like
+        	<a href="http://www.openprocessing.org">OpenProcessing</a> but
+        	with a ClojureScript twist.</p>
+        <hr>
+        <p><a href="https://github.com/tmatinla/ogol">Source in GitHub</a></p>
     </div>
     <div id="canvas-window" class="ui-widget-content">
     	<h3 class="ui-widget-header">Canvas</h3>
@@ -45,15 +59,12 @@
     </div>
     <div id="sketch-window" class="ui-widget-content">
     	<h3 class="ui-widget-header">Sketch</h3>
-    	<textarea id="sketch1">(defsketch "random-circles"
-  {:setup
-   (fn []
-     (sk/size (- (sk/screen-width) 50)
-              (- (sk/screen-height) 50))
-     (sk/smooth)
-     (sk/background 255))
-   :key-typed (fn [] (sk/background 255))
-   :draw (fn []
+    	<textarea id="sketch1">{:setup
+   (fn [] (sk/frame-rate 2)
+          (sk/smooth)
+          (sk/background 127))
+ :key-typed (fn [] (sk/background 127))
+ :draw (fn []
            (sk/fill 255 1)
            (sk/no-stroke)
            (sk/rect 0 0 (sk/sketch-width)
@@ -63,7 +74,7 @@
                     (sk/random 255))
            (sk/stroke-weight (sk/random 10))
            (sk/stroke 0)
-           (sk/random-circle))})</textarea>
+           (sk/random-circle))}</textarea>
     	<button id="run-sketch">Run</button>
     	<button id="stop-sketch">Stop</button>
     </div>
@@ -87,6 +98,8 @@
   		ogol.console.createConsole();
   		ogol.sketch.createSketch();
   		// ogol.repl.createRepl();
+
+ 		goog.require('libre.sketch');
 
   		goog.require('cljs.core'); // needed for console? Himera has this
   		goog.provide('cljs.user');
