@@ -7,6 +7,8 @@
 (defn- get-textarea-value [textarea]
   (.-value (.get ($ textarea) 0)))
 
+(def ^:dynamic *processing* nil)
+
 (defn run-sketch [canvas sketch]
     (let [input (.trim js/jQuery sketch)
           compiled (himera/go-compile input)]
@@ -17,9 +19,6 @@
           (catch js/Error e
             (js/alert "Compilation error: " e))))))
 
-  ; (js/alert (himera/go-compile sketch)))
-  ;(sk/run-sketch canvas (himera/go-compile sketch)))
-
 (defn ^:export createSketch []
   (jayq/ready
     (doto ($ :#sketch-window)
@@ -28,7 +27,8 @@
       (.draggable))
     (doto ($ :#run-sketch)
       (-> (.button (clj->js {:icons {:primary "ui-icon-play"}}))
-      	  (.click (fn [e] (run-sketch :#canvas1 (get-textarea-value :#sketch1))))))
+      	  (.click (fn [e] (set! *processing* (run-sketch :#canvas1 (get-textarea-value :#sketch1)))))))
     (doto ($ :#stop-sketch)
-      (.button (clj->js {:icons {:primary "ui-icon-stop"}})))))
+      (-> (.button (clj->js {:icons {:primary "ui-icon-stop"}}))
+          (.click (fn [e] (. *processing* exit)))))))
 
