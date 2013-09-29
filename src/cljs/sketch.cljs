@@ -27,8 +27,14 @@
       (.draggable))
     (doto ($ :#run-sketch)
       (-> (.button (clj->js {:icons {:primary "ui-icon-play"}}))
-      	  (.click (fn [e] (set! *processing* (run-sketch :#canvas1 (get-textarea-value :#sketch1)))))))
+      	  (.click (fn [e]
+                    (when *processing*
+                      (. *processing* exit))
+                    (set! *processing* (run-sketch :#canvas1 (get-textarea-value :#sketch1)))))))
     (doto ($ :#stop-sketch)
       (-> (.button (clj->js {:icons {:primary "ui-icon-stop"}}))
-          (.click (fn [e] (. *processing* exit)))))))
+          (.click (fn [e]
+                    (when *processing*
+                      (. *processing* exit))
+                    (set! *processing* nil)))))))
 
